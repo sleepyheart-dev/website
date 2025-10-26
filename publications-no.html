@@ -1,72 +1,7 @@
-<!DOCTYPE html>
-<html lang="no">
-<head>
-  <meta charset="utf-8">
-  <title>A P Pacheco — Publikasjoner</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Dato øverst til venstre -->
-  <div id="dateline"></div>
-
-  <header>
-    <h1>Publikasjoner</h1>
-    <div class="subtitle">Automatisk hentet fra Crossref for forfatter: A&nbsp;P&nbsp;Pacheco</div>
-    <nav>
-      <a href="index-no.html">Hjem</a> ·
-      <a href="index.html">EN</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="pubs">
-      <h2>Fagfellevurderte publikasjoner</h2>
-      <ul id="pub-list"><li>Laster publikasjoner …</li></ul>
-      <p class="small">Komplett liste på <a href="https://orcid.org/0000-0003-2523-1502" target="_blank" rel="noopener">ORCID</a>.</p>
-    </section>
-  </main>
-
-  <footer>
-    © <span id="y"></span> André P. Pacheco
-  </footer>
-
-  <script>
-    // Norsk dato og årstall
-    document.getElementById('dateline').textContent =
-      new Date().toLocaleDateString('no-NO',{year:'numeric',month:'long',day:'numeric'});
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Crossref-hent (forfatternavn). Alternativt: bruk ORCID filter (se kommentert URL).
-    const list = document.getElementById('pub-list');
-    const url = 'https://api.crossref.org/works?query.author=A+P+Pacheco&rows=24&sort=issued&order=desc';
-    // ORCID-alternativ (erstatt med din faktiske ORCID):
-    // const url = 'https://api.crossref.org/works?filter=orcid:0000-0003-2523-1502&rows=50&sort=issued&order=desc';
-
-    fetch(url, { headers: { 'Accept':'application/json' } })
-      .then(r => r.json())
-      .then(data => {
-        const items = data?.message?.items || [];
-        if (!items.length) { list.innerHTML = '<li>Ingen elementer funnet.</li>'; return; }
-        list.innerHTML = '';
-        const seen = new Set();
-        items.forEach(item => {
-          const doi = (item.DOI||'').toLowerCase();
-          if (doi && seen.has(doi)) return; if (doi) seen.add(doi);
-          const title = item.title?.[0] || '[ingen tittel]';
-          const year =
-            item['issued']?.['date-parts']?.[0]?.[0] ||
-            item['published-print']?.['date-parts']?.[0]?.[0] ||
-            item['created']?.['date-parts']?.[0]?.[0] || '';
-          const venue = item['container-title']?.[0] || '';
-          const href = item.URL || (doi ? `https://doi.org/${doi}` : '#');
-
-          const li = document.createElement('li');
-          li.innerHTML = `${year ? year + ': ' : ''}<a href="${href}" target="_blank" rel="noopener">${title}</a>${venue ? ' — <em>' + venue + '</em>' : ''}`;
-          list.appendChild(li);
-        });
-      })
-      .catch(() => list.innerHTML = '<li>Kunne ikke laste publikasjoner automatisk.</li>');
-  </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="no"><head>
+<meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=no">
+<title>Publikasjoner → Google Scholar</title>
+<link rel="canonical" href="https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=no">
+</head><body>
+<p>Sender deg videre til <a href="https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=no">Google Scholar</a>…</p>
+</body></html>
