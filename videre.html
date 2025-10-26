@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <title>Videre — A P Pacheco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="dateline"></div>
+  <header>
+    <h1>Videre forskningsretning</h1>
+    <nav>
+      <a href="index-no.html">Hjem</a> ·
+      <a href="om.html">Om meg</a> ·
+      <a href="forskning.html">Forskning</a> ·
+      <a href="videre.html">Videre</a> ·
+      <a href="dokumenter.html">Dokumenter</a> ·
+      <a href="publications-no.html">Publikasjoner</a> ·
+      <a href="kontakt.html">Kontakt</a> ·
+      <a href="index.html">EN</a>
+    </nav>
+  </header>
+  <main>
+    <p>Jeg ønsker å undersøke hvordan kognitive-atferdsmessige og stressregulerende tiltak påvirker
+      søvn–kardiometabolske mekanismer ved å integrere atferdsdata, fysiologiske målinger og registerdata.</p>
+  </main>
+  <footer>© <span id="y"></span> André P. Pacheco</footer>
+  <script>
+    document.getElementById('dateline').textContent =
+      new Date().toLocaleDateString('no-NO',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

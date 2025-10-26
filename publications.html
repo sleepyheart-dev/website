@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A P Pacheco — Publications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="dateline"></div>
+
+  <header>
+    <h1>Publications</h1>
+    <div class="subtitle">Auto-fetched from Crossref for author: A&nbsp;P&nbsp;Pacheco</div>
+    <nav>
+      <a href="index.html">Home</a> ·
+      <a href="index-no.html">NO</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="pubs">
+      <h2>Peer-reviewed publications</h2>
+      <ul id="pub-list"><li>Loading publications…</li></ul>
+      <p class="small">Complete list on <a href="https://orcid.org/0000-0003-2523-1502" target="_blank" rel="noopener">ORCID</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> André P. Pacheco
+  </footer>
+
+  <script>
+    // Dateline + year
+    document.getElementById('dateline').textContent =
+      new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Crossref fetch (author query). Optional: swap to ORCID filter.
+    const list = document.getElementById('pub-list');
+    const url = 'https://api.crossref.org/works?query.author=A+P+Pacheco&rows=24&sort=issued&order=desc';
+    // OR: const url = 'https://api.crossref.org/works?filter=orcid:0000-0003-2523-1502&rows=50&sort=issued&order=desc';
+
+    fetch(url, { headers: { 'Accept':'application/json' } })
+      .then(r => r.json())
+      .then(data => {
+        const items = data?.message?.items || [];
+        if (!items.length) { list.innerHTML = '<li>No items found.</li>'; return; }
+        list.innerHTML = '';
+        const seen = new Set();
+        items.forEach(item => {
+          const doi = (item.DOI||'').toLowerCase();
+          if (doi && seen.has(doi)) return; if (doi) seen.add(doi);
+          const title = item.title?.[0] || '[no title]';
+          const year =
+            item['issued']?.['date-parts']?.[0]?.[0] ||
+            item['published-print']?.['date-parts']?.[0]?.[0] ||
+            item['created']?.['date-parts']?.[0]?.[0] || '';
+          const venue = item['container-title']?.[0] || '';
+          const href = item.URL || (doi ? `https://doi.org/${doi}` : '#');
+
+          const li = document.createElement('li');
+          li.innerHTML = `${year ? year + ': ' : ''}<a href="${href}" target="_blank" rel="noopener">${title}</a>${venue ? ' — <em>' + venue + '</em>' : ''}`;
+          list.appendChild(li);
+        });
+      })
+      .catch(() => list.innerHTML = '<li>Could not load publications automatically.</li>');
+  </script>
+</body>
+</html>

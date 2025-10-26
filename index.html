@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A P Pacheco — Sleep Medicine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Medical graduate & PhD candidate in sleep medicine (OUS & UiO).">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Dateline (auto) -->
+  <div id="dateline"></div>
+
+  <header>
+    <h1>A P Pacheco</h1>
+    <div class="subtitle">Medical graduate & PhD candidate in sleep medicine · Oslo University Hospital · University of Oslo</div>
+    <nav>
+      <a href="#about">About</a> ·
+      <a href="#research">Research</a> ·
+      <a href="#future">Future</a> ·
+      <a href="#docs">Docs</a> ·
+      <a href="publications.html">Publications</a> ·
+      <a href="index-no.html" lang="no" hreflang="no">NO</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>I am a medical graduate and PhD candidate in sleep medicine at Oslo University Hospital and the University of Oslo.
+      My research explores psychological, behavioural and physiological mechanisms linking insomnia, circadian rhythms, and cardiometabolic health.</p>
+      <p class="small">Publications appear under <strong>A P Pacheco</strong> (André Pekkola Pacheco).</p>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <ul>
+        <li><strong>Insomnia & sleep quality</strong> — behavioural mechanisms and treatment.</li>
+        <li><strong>Circadian biology</strong> — misalignment/variability and cardiometabolic risk.</li>
+        <li><strong>Heart–brain–gut axes</strong> — sleep, emotion regulation, systemic health.</li>
+      </ul>
+    </section>
+
+    <section id="future">
+      <h2>Future Directions</h2>
+      <p>I aim to examine how cognitive-behavioural and stress-regulating interventions influence sleep–cardiometabolic pathways,
+      integrating behavioural, physiological, and registry-based data.</p>
+    </section>
+
+    <section id="docs">
+      <h2>Documents</h2>
+      <ul>
+        <li><a href="pdfs/CV_Pacheco.pdf" target="_blank">Curriculum Vitae (PDF)</a></li>
+        <li><a href="pdfs/Research_Statement.pdf" target="_blank">Research Statement (PDF)</a></li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:andre.pacheco@ous-hf.no">&#097;ndre.pacheco&#64;ous-hf.no</a></p>
+      <!-- Optional simple contact form (Formspree). Remove if you prefer email only.
+      <form class="contact" action="https://formspree.io/f/YOUR-FORM-ID" method="POST" autocomplete="off" novalidate>
+        <label>Your Name <input type="text" name="name" required></label>
+        <label>Email <input type="email" name="email" required></label>
+        <label>Message <textarea name="message" required></textarea></label>
+        <div class="hp-wrap" aria-hidden="true">
+          <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <label>Human check: What is 2 + 2?
+          <input type="text" name="check" inputmode="numeric" pattern="4|04|four|Four" title="Please enter 4" required>
+        </label>
+        <input type="hidden" name="_subject" value="Website inquiry (appacheco.net)">
+        <button type="submit">Send</button>
+        <p class="small">Educational site — not a clinical booking channel.</p>
+      </form>
+      -->
+    </section>
+  </main>
+
+ <!-- Contact form via Formspree -->
+  <form class="contact"
+        action="https://formspree.io/f/YOUR-FORM-ID"
+        method="POST" autocomplete="off" novalidate>
+    <input type="hidden" name="_subject" value="Website inquiry (appacheco.net)">
+    <!-- After submit, redirect to a lightweight thank-you page -->
+    <input type="hidden" name="_next" value="/contact-thanks.html">
+
+    <label>Your name
+      <input type="text" name="name" required>
+    </label>
+
+    <label>Email
+      <input type="email" name="email" required>
+    </label>
+
+    <label>Message
+      <textarea name="message" required
+        placeholder="Briefly describe your request (talks, collaborations, etc.)"></textarea>
+    </label>
+
+    <!-- Honeypot: bots fill this; humans won’t -->
+    <div class="hp-wrap" aria-hidden="true">
+      <label>Leave this field empty
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+      </label>
+    </div>
+
+    <!-- Lightweight human check (no CAPTCHA) -->
+    <label>Human check: What is 2 + 2?
+      <input type="text" name="check" inputmode="numeric"
+             pattern="4|04|four|Four" title="Please enter 4" required>
+    </label>
+
+    <button type="submit">Send</button>
+    <p class="small">Educational site — not a clinical booking channel.</p>
+  </form>
+</section>
+
+  <footer>
+    © <span id="y"></span> André P. Pacheco — Publications under A P Pacheco
+  </footer>
+
+  <script>
+    // English dateline
+    document.getElementById('dateline').textContent =
+      new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'});
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

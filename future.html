@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Future — A P Pacheco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="dateline"></div>
+  <header>
+    <h1>Future Directions</h1>
+    <nav>
+      <a href="index.html">Home</a> · <a href="about.html">About</a> · <a href="research.html">Research</a> ·
+      <a href="future.html">Future</a> · <a href="docs.html">Docs</a> · <a href="publications.html">Publications</a> ·
+      <a href="contact.html">Contact</a> · <a href="index-no.html">NO</a>
+    </nav>
+  </header>
+  <main>
+    <p>I aim to examine how cognitive-behavioural and stress-regulating interventions influence sleep–cardiometabolic pathways,
+    integrating behavioural, physiological, and registry-based data.</p>
+  </main>
+  <footer>© <span id="y"></span> André P. Pacheco</footer>
+  <script>
+    document.getElementById('dateline').textContent =
+      new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

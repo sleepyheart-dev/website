@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <title>Forskning — A P Pacheco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="dateline"></div>
+  <header>
+    <h1>Forskning</h1>
+    <nav>
+      <a href="index-no.html">Hjem</a> ·
+      <a href="om.html">Om meg</a> ·
+      <a href="forskning.html">Forskning</a> ·
+      <a href="videre.html">Videre</a> ·
+      <a href="dokumenter.html">Dokumenter</a> ·
+      <a href="publications-no.html">Publikasjoner</a> ·
+      <a href="kontakt.html">Kontakt</a> ·
+      <a href="index.html">EN</a>
+    </nav>
+  </header>
+  <main>
+    <ul>
+      <li><strong>Insomni og søvnkvalitet</strong> — atferdsmekanismer og behandling.</li>
+      <li><strong>Døgnrytme</strong> — feiljustering/variabilitet og kardiometabolsk risiko.</li>
+      <li><strong>Hjerte–hjerne–tarm-aksen</strong> — søvn, emosjonsregulering og systemisk helse.</li>
+    </ul>
+  </main>
+  <footer>© <span id="y"></span> André P. Pacheco</footer>
+  <script>
+    document.getElementById('dateline').textContent =
+      new Date().toLocaleDateString('no-NO',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
