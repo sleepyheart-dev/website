@@ -1,24 +1,23 @@
-# appacheco-site
+# website
 
-Bilingual static academic site (EN/NO) for **A P Pacheco**.  
-Warm “paper” look, Courier headings + Garamond body, dark-mode aware.  
-Includes dynamic publications pages via Crossref.
+Bilingual (EN/NO) static academic website for **A P Pacheco**.
 
-## Files
-- `index.html` (EN)
-- `index-no.html` (NO)
-- `publications.html` (EN, Crossref)
-- `publications-no.html` (NO, Crossref)
-- `styles.css`
+## Structure
+- `index.html` / `index-no.html`: home pages
+- `about.html` / `om.html`: background
+- `research.html` / `forskning.html`: research themes
+- `future.html` / `videre.html`: research direction
+- `docs.html` / `dokumenter.html`: minimal CV pages
+- `publications.html` / `publications-no.html`: ORCID-based publication lists with Scholar fallback
+- `contact.html` / `kontakt.html`: contact pages
+- `styles.css`: shared responsive design
+- `site.js`: shared dateline/year and dark-mode toggle logic
 
 ## Local preview
-Open the folder in VS Code. Optional: install **Live Server** → “Go Live”.
+Open the folder in a browser, or run a static server in this directory:
 
-## Publish on GitHub Pages
-1. Create a **public** repo `appacheco-site` on GitHub.
-2. Commit & push these files to `main`, or upload via web UI.
-3. Repo → **Settings → Pages → Source: main / root** → Save.
-4. Live at `https://sleepyheart-dev.github.io/appacheco-site/`.
+```bash
+python3 -m http.server 8000
+```
 
-## Custom domain (optional)
-Create a `CNAME` file with:
+Then open `http://localhost:8000`.

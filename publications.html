@@ -1,7 +1,526 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=en">
-<title>Publications → Google Scholar</title>
-<link rel="canonical" href="https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=en">
-</head><body>
-<p>Redirecting to <a href="https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=en">Google Scholar</a>…</p>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Publications | A P Pacheco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Publication profile for A P Pacheco.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+  <div class="site">
+    <div class="dateline" id="dateline"></div>
+
+    <header class="site-header">
+      <div class="header-top">
+        <a class="nameplate" href="index.html">A P Pacheco</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="theme-icon" aria-hidden="true">&#9789;</span>
+          <span class="sr-only">Toggle dark mode</span>
+        </button>
+      </div>
+      <p class="roleline">Medical graduate · PhD candidate in sleep medicine</p>
+      <p class="affiliation">University of Oslo · Oslo University Hospital</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="research.html">Research</a>
+        <a href="future.html">Direction</a>
+        <a href="docs.html">CV</a>
+        <a href="publications.html" aria-current="page">Publications</a>
+        <a href="contact.html">Contact</a>
+        <a href="publications-no.html" lang="no" hreflang="no">NO</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel">
+        <p class="eyebrow">Scholarly Output</p>
+        <h1>Publications</h1>
+        <p>This list is loaded from ORCID for <strong>A P Pacheco</strong>.</p>
+        <p class="small">ORCID: <a href="https://orcid.org/0000-0003-2523-1502" target="_blank" rel="noopener">0000-0003-2523-1502</a> · Curated profile: <a href="https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+        <div id="pub-status" class="pub-status">Loading publications from ORCID...</div>
+        <ol id="pub-list" class="pub-list" aria-live="polite"></ol>
+        <h2>Peer Review Activity</h2>
+        <p class="small">ORCID includes automatic peer-review activity from integrated review services. Coverage may vary by service integration and visibility settings, so it may not be fully comprehensive. For the full current record, see ORCID.</p>
+        <p class="small">Review venues include Scientific Reports, BMJ Open, BMC Psychiatry, BMC Public Health, Brain Imaging and Behavior, Discover Medicine, Discover Public Health, European Heart Journal - Quality of Care and Clinical Outcomes, European Journal of Cardiovascular Nursing, European Journal of Medical Research, Frontiers in Nutrition, Journal of Diabetes and Metabolic Disorders, Lipids in Health and Disease, npj Mental Health, Nutrition Journal, and Psychology, Health and Medicine.</p>
+        <p id="review-status" class="pub-status">Loading peer-review activity from ORCID...</p>
+        <ul id="review-list" class="pub-list" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">© <span id="y"></span> André P. Pacheco</footer>
+  </div>
+
+  <script src="site.js"></script>
+  <script>
+    const orcidId = '0000-0003-2523-1502';
+    const orcidRecordUrl = `https://orcid.org/${orcidId}`;
+    const scholarUrl = 'https://scholar.google.com/citations?user=V2PIw6MAAAAJ&hl=en';
+    const statusEl = document.getElementById('pub-status');
+    const listEl = document.getElementById('pub-list');
+    const reviewStatusEl = document.getElementById('review-status');
+    const reviewListEl = document.getElementById('review-list');
+    const orcidWorksUrl = `https://pub.orcid.org/v3.0/${orcidId}/works`;
+    const orcidPeerReviewUrl = `https://pub.orcid.org/v3.0/${orcidId}/peer-reviews`;
+    const orcidPersonUrl = `https://pub.orcid.org/v3.0/${orcidId}/person`;
+    let selfProfile = {
+      familyTokens: ['pacheco'],
+      givenTokens: ['andre'],
+      initialsTokens: ['ap'],
+      displayTokens: ['andre pacheco', 'andre p pacheco', 'a p pacheco']
+    };
+
+    function datePartsFromOrcid(summary) {
+      const year = Number(summary?.['publication-date']?.year?.value || 0);
+      const month = Number(summary?.['publication-date']?.month?.value || 0);
+      const day = Number(summary?.['publication-date']?.day?.value || 0);
+      return { year, month, day };
+    }
+
+    function dateScore(parts) {
+      return (parts.year || 0) * 10000 + (parts.month || 0) * 100 + (parts.day || 0);
+    }
+
+    function firstExternalId(summary, desiredType) {
+      const ids = summary?.['external-ids']?.['external-id'] || [];
+      return ids.find((entry) => (entry['external-id-type'] || '').toLowerCase() === desiredType);
+    }
+
+    function workDoi(summary) {
+      const raw = (firstExternalId(summary, 'doi')?.['external-id-value'] || '').trim();
+      if (!raw) {
+        return null;
+      }
+      return raw
+        .replace(/^https?:\/\/(dx\.)?doi\.org\//i, '')
+        .replace(/^doi:\s*/i, '')
+        .trim();
+    }
+
+    function preferredLink(summary) {
+      const doi = workDoi(summary);
+      if (doi) {
+        return `https://doi.org/${doi}`;
+      }
+
+      const piiEntry = firstExternalId(summary, 'pmid');
+      if (piiEntry?.['external-id-value']) {
+        return `https://pubmed.ncbi.nlm.nih.gov/${piiEntry['external-id-value']}/`;
+      }
+
+      const idEntries = summary?.['external-ids']?.['external-id'] || [];
+      for (const entry of idEntries) {
+        const url = entry?.['external-id-url']?.value;
+        if (url) {
+          return url;
+        }
+      }
+
+      return summary?.url?.value || scholarUrl;
+    }
+
+    function workTitle(summary) {
+      const title = summary?.title?.title?.value;
+      if (title) {
+        return title;
+      }
+      return 'Untitled';
+    }
+
+    function sourceTitle(summary) {
+      const journal = summary?.['journal-title']?.value;
+      if (journal) {
+        return journal;
+      }
+      const type = summary?.type || '';
+      return type ? type.replace(/_/g, ' ').toLowerCase() : 'Source unavailable';
+    }
+
+    function normalizeName(name) {
+      return (name || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+    }
+
+    function dedupe(values) {
+      return Array.from(new Set(values.filter(Boolean)));
+    }
+
+    function initialsFromName(name) {
+      return normalizeName(name)
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((part) => part[0])
+        .join('');
+    }
+
+    function buildSelfProfileFromPerson(person) {
+      const given = normalizeName(person?.name?.['given-names']?.value || '');
+      const family = normalizeName(person?.name?.['family-name']?.value || '');
+      const otherNames = (person?.['other-names']?.['other-name'] || [])
+        .map((entry) => normalizeName(entry?.content || ''))
+        .filter(Boolean);
+
+      const displayTokens = dedupe([
+        [given, family].filter(Boolean).join(' ').trim(),
+        ...otherNames,
+        ...selfProfile.displayTokens
+      ]);
+      const initialsTokens = dedupe([
+        ...displayTokens.map((name) => initialsFromName(name)),
+        ...selfProfile.initialsTokens
+      ]);
+      const familyTokens = dedupe([
+        ...family.split(/\s+/),
+        ...selfProfile.familyTokens
+      ]);
+      const givenTokens = dedupe([
+        ...given.split(/\s+/),
+        ...selfProfile.givenTokens
+      ]);
+
+      return {
+        familyTokens,
+        givenTokens,
+        initialsTokens,
+        displayTokens
+      };
+    }
+
+    async function loadSelfProfile() {
+      try {
+        const response = await fetch(orcidPersonUrl, { headers: { Accept: 'application/json' } });
+        if (!response.ok) {
+          return;
+        }
+        const person = await response.json();
+        selfProfile = buildSelfProfileFromPerson(person);
+      } catch (error) {
+        // Keep defaults when ORCID person profile is unavailable.
+      }
+    }
+
+    function isSelfAuthor(name) {
+      const normalized = normalizeName(name);
+      if (!normalized) {
+        return false;
+      }
+
+      const familyMatch = selfProfile.familyTokens.some((token) => normalized.includes(token));
+      if (!familyMatch) {
+        return false;
+      }
+
+      if (selfProfile.displayTokens.includes(normalized)) {
+        return true;
+      }
+
+      if (selfProfile.givenTokens.some((token) => normalized.includes(token))) {
+        return true;
+      }
+
+      const initials = initialsFromName(normalized);
+      if (selfProfile.initialsTokens.some((token) => initials.startsWith(token))) {
+        return true;
+      }
+
+      return /\ba\.?\s*p\.?\b/.test(normalized) || /\bap\b/.test(normalized);
+    }
+
+    function uniqueNames(names) {
+      const seen = new Set();
+      const result = [];
+      names.forEach((name) => {
+        const clean = (name || '').trim();
+        const key = normalizeName(clean);
+        if (!clean || !key || seen.has(key)) {
+          return;
+        }
+        seen.add(key);
+        result.push(clean);
+      });
+      return result;
+    }
+
+    function extractContributors(node) {
+      const contributors = node?.contributors?.contributor || [];
+      const names = contributors
+        .map((entry) => entry?.['credit-name']?.value || '')
+        .filter(Boolean);
+      return uniqueNames(names);
+    }
+
+    async function fetchWorkDetail(summary) {
+      const putCode = summary?.['put-code'];
+      if (!putCode) {
+        return null;
+      }
+      const url = `https://pub.orcid.org/v3.0/${orcidId}/work/${putCode}`;
+      const response = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (!response.ok) {
+        throw new Error(`ORCID work HTTP ${response.status}`);
+      }
+      return response.json();
+    }
+
+    async function fetchAuthorsFromCrossref(doi) {
+      if (!doi) {
+        return [];
+      }
+      const response = await fetch(`https://api.crossref.org/works/${encodeURIComponent(doi)}`, {
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) {
+        throw new Error(`Crossref HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      const authors = Array.isArray(data?.message?.author) ? data.message.author : [];
+      const names = authors
+        .map((author) => [author.given, author.family].filter(Boolean).join(' ').trim())
+        .filter(Boolean);
+      return uniqueNames(names);
+    }
+
+    async function resolveAuthors(summary) {
+      const fromSummary = extractContributors(summary);
+      if (fromSummary.length) {
+        return fromSummary;
+      }
+
+      try {
+        const detail = await fetchWorkDetail(summary);
+        const fromDetail = extractContributors(detail);
+        if (fromDetail.length) {
+          return fromDetail;
+        }
+      } catch (error) {
+        // Ignore and continue to DOI fallback.
+      }
+
+      try {
+        const doi = workDoi(summary);
+        return await fetchAuthorsFromCrossref(doi);
+      } catch (error) {
+        return [];
+      }
+    }
+
+    async function mapWithConcurrency(items, limit, mapper) {
+      const results = new Array(items.length);
+      let cursor = 0;
+
+      async function worker() {
+        while (cursor < items.length) {
+          const index = cursor;
+          cursor += 1;
+          results[index] = await mapper(items[index], index);
+        }
+      }
+
+      const workers = Array.from({ length: Math.min(limit, items.length) }, () => worker());
+      await Promise.all(workers);
+      return results;
+    }
+
+    function appendAuthorsLine(container, authors) {
+      if (!authors.length) {
+        return;
+      }
+
+      const line = document.createElement('p');
+      line.className = 'pub-authors';
+      line.appendChild(document.createTextNode('Authors: '));
+
+      authors.forEach((author, index) => {
+        if (index > 0) {
+          line.appendChild(document.createTextNode(', '));
+        }
+        if (isSelfAuthor(author)) {
+          const strong = document.createElement('strong');
+          strong.textContent = author;
+          line.appendChild(strong);
+        } else {
+          line.appendChild(document.createTextNode(author));
+        }
+      });
+
+      container.appendChild(line);
+    }
+
+    function renderPublications(records) {
+      listEl.innerHTML = '';
+      if (!records.length) {
+        statusEl.innerHTML =
+          `No ORCID works are currently visible. Use <a href="${scholarUrl}" target="_blank" rel="noopener">Google Scholar</a>.`;
+        return;
+      }
+
+      const withAuthors = records.filter((record) => record.authors.length > 0).length;
+      statusEl.textContent =
+        withAuthors > 0
+          ? `${records.length} publication(s) loaded from ORCID (${withAuthors} with author lists).`
+          : `${records.length} publication(s) loaded from ORCID.`;
+
+      records.forEach((record) => {
+        const summary = record.summary;
+        const li = document.createElement('li');
+        li.className = 'pub-item';
+
+        const title = workTitle(summary);
+        const year = datePartsFromOrcid(summary).year;
+        const source = sourceTitle(summary);
+        const link = preferredLink(summary);
+        const doi = workDoi(summary);
+
+        const heading = document.createElement('h2');
+        heading.className = 'pub-title';
+
+        const titleLink = document.createElement('a');
+        titleLink.href = link;
+        titleLink.target = '_blank';
+        titleLink.rel = 'noopener';
+        titleLink.textContent = title;
+        heading.appendChild(titleLink);
+
+        const meta = document.createElement('p');
+        meta.className = 'pub-meta';
+        meta.textContent = `${year || 'Year n/a'} · ${source}`;
+
+        li.appendChild(heading);
+        appendAuthorsLine(li, record.authors);
+        li.appendChild(meta);
+
+        if (doi) {
+          const actions = document.createElement('p');
+          actions.className = 'pub-actions';
+          const doiLink = document.createElement('a');
+          doiLink.href = `https://doi.org/${doi}`;
+          doiLink.target = '_blank';
+          doiLink.rel = 'noopener';
+          doiLink.textContent = `DOI: ${doi}`;
+          actions.appendChild(doiLink);
+          li.appendChild(actions);
+        }
+
+        listEl.appendChild(li);
+      });
+    }
+
+    async function loadPublicationsFromOrcid() {
+      try {
+        await loadSelfProfile();
+
+        const response = await fetch(orcidWorksUrl, { headers: { Accept: 'application/json' } });
+        if (!response.ok) {
+          throw new Error(`ORCID HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const groups = Array.isArray(data?.group) ? data.group : [];
+        const summaries = [];
+
+        groups.forEach((group) => {
+          const summary = Array.isArray(group['work-summary']) ? group['work-summary'][0] : null;
+          if (summary) {
+            summaries.push(summary);
+          }
+        });
+
+        summaries.sort((a, b) => dateScore(datePartsFromOrcid(b)) - dateScore(datePartsFromOrcid(a)));
+        const limited = summaries.slice(0, 30);
+        const records = await mapWithConcurrency(limited, 6, async (summary) => ({
+          summary,
+          authors: await resolveAuthors(summary)
+        }));
+        renderPublications(records);
+      } catch (error) {
+        statusEl.innerHTML =
+          `Could not load ORCID records right now. Please use <a href="${scholarUrl}" target="_blank" rel="noopener">Google Scholar</a>.`;
+      }
+    }
+
+    function reviewSourceName(entry) {
+      const raw =
+        entry?.['convening-organization']?.name ||
+        entry?.['review-group-id'] ||
+        'Unspecified source';
+      const key = normalizeName(raw);
+      if (key === 'ehj-qcco') {
+        return 'European Heart Journal - Quality of Care and Clinical Outcomes';
+      }
+      if (key === 'ejcn') {
+        return 'European Journal of Cardiovascular Nursing';
+      }
+      return raw;
+    }
+
+    function renderPeerReviews(entries, groupCount) {
+      reviewListEl.innerHTML = '';
+      if (!entries.length) {
+        reviewStatusEl.innerHTML =
+          `Peer-review activity is available via <a href="${orcidRecordUrl}" target="_blank" rel="noopener">ORCID profile</a>.`;
+        return;
+      }
+
+      const counts = new Map();
+      entries.forEach((entry) => {
+        const source = reviewSourceName(entry);
+        counts.set(source, (counts.get(source) || 0) + 1);
+      });
+
+      const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+      reviewStatusEl.textContent =
+        `Peer review (${entries.length} reviews for ${groupCount} publications/grants)`;
+
+      sorted.forEach(([source, count]) => {
+        const li = document.createElement('li');
+        li.className = 'pub-item';
+
+        const title = document.createElement('p');
+        title.className = 'pub-title';
+        title.textContent = `Review activity for ${source}`;
+
+        const meta = document.createElement('p');
+        meta.className = 'pub-meta';
+        meta.textContent = `(${count})`;
+
+        li.appendChild(title);
+        li.appendChild(meta);
+        reviewListEl.appendChild(li);
+      });
+    }
+
+    async function loadPeerReviewsFromOrcid() {
+      try {
+        const response = await fetch(orcidPeerReviewUrl, { headers: { Accept: 'application/json' } });
+        if (!response.ok) {
+          throw new Error(`ORCID peer-review HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const groups = Array.isArray(data?.group) ? data.group : [];
+        const summaries = [];
+
+        groups.forEach((group) => {
+          const entries = Array.isArray(group['peer-review-summary']) ? group['peer-review-summary'] : [];
+          entries.forEach((entry) => summaries.push(entry));
+        });
+
+        renderPeerReviews(summaries, groups.length);
+      } catch (error) {
+        reviewStatusEl.innerHTML =
+          `Peer-review activity is available via <a href="${orcidRecordUrl}" target="_blank" rel="noopener">ORCID profile</a>.`;
+      }
+    }
+
+    loadPublicationsFromOrcid();
+    loadPeerReviewsFromOrcid();
+  </script>
+</body>
+</html>

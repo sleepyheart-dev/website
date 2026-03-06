@@ -2,38 +2,74 @@
 <html lang="no">
 <head>
   <meta charset="utf-8">
-  <title>A P Pacheco — Søvnmedisin</title>
+  <title>A P Pacheco | Søvnmedisinsk forskning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Medisinsk utdannet og doktorgradsstipendiat i søvnmedisin (OUS & UiO).">
+  <meta name="description" content="Akademisk profil for A P Pacheco, medisinsk utdannet og doktorgradskandidat i søvnmedisin.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="dateline"></div>
+  <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
 
-  <header>
-    <h1>A P Pacheco</h1>
-    <div class="subtitle">Medisinsk utdannet & doktorgradsstipendiat i søvnmedisin · Oslo universitetssykehus · Universitetet i Oslo</div>
-    <nav>
-      <a href="index-no.html">Hjem</a> ·
-      <a href="om.html">Om meg</a> ·
-      <a href="forskning.html">Forskning</a> ·
-      <a href="videre.html">Videre</a> ·
-      <a href="dokumenter.html">Dokumenter</a> ·
-      <a href="publications-no.html">Publikasjoner</a> ·
-      <a href="kontakt.html">Kontakt</a> ·
-      <a href="index.html" lang="en" hreflang="en">EN</a>
-    </nav>
-  </header>
+  <div class="site">
+    <div class="dateline" id="dateline"></div>
 
-  <main>
-    <p>Velkommen til et kortfattet akademisk profilnettsted for <strong>A P Pacheco</strong>. Velg seksjon via menyen over.</p>
-  </main>
+    <header class="site-header">
+      <div class="header-top">
+        <a class="nameplate" href="index-no.html">A P Pacheco</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="theme-icon" aria-hidden="true">&#9789;</span>
+          <span class="sr-only">Toggle dark mode</span>
+        </button>
+      </div>
+      <p class="roleline">Medisinsk utdannet · Doktorgradskandidat i søvnmedisin</p>
+      <p class="affiliation">Universitetet i Oslo · Oslo universitetssykehus</p>
+      <nav class="site-nav" aria-label="Hovedmeny">
+        <a href="index-no.html" aria-current="page">Hjem</a>
+        <a href="om.html">Om</a>
+        <a href="forskning.html">Forskning</a>
+        <a href="videre.html">Retning</a>
+        <a href="dokumenter.html">CV</a>
+        <a href="publications-no.html">Publikasjoner</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="index.html" lang="en" hreflang="en">EN</a>
+      </nav>
+    </header>
 
-  <footer>© <span id="y"></span> André P. Pacheco — Publiserer som A P Pacheco</footer>
-  <script>
-    document.getElementById('dateline').textContent =
-      new Date().toLocaleDateString('no-NO',{year:'numeric',month:'long',day:'numeric'});
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+    <main>
+      <section class="panel">
+        <p class="eyebrow">Akademisk profil</p>
+        <h1>Søvnmedisin og kardiometabolsk helse</h1>
+        <p class="lead">Her finner du en kortfattet oversikt over utdanning og doktorgradsforskning innen søvnmedisin.</p>
+        <p class="small">Utformet som en komitérettet akademisk profil for vurdering av forskning og postdoktor-søknader.</p>
+
+        <div class="grid-two">
+          <section>
+            <h2>Faglig fokus</h2>
+            <ul>
+              <li>Insomni og søvnkvalitet i relasjon til kardiometabolske utfall.</li>
+              <li>Døgnrytme, variasjon i søvntidspunkt og atferdsmessige påvirkningsfaktorer.</li>
+              <li>Translasjonelle tilnærminger mellom kliniske og fysiologiske data.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Minimal CV</h2>
+            <ul class="timeline">
+              <li><span class="tl-years">2018-2023</span>Medisinstudiet, Uppsala universitet</li>
+              <li><span class="tl-years">2023-pågående</span>Doktorgradskandidat, Universitetet i Oslo</li>
+              <li><span class="tl-years">2023-pågående</span>Doktorgradsstipendiat, Oslo universitetssykehus</li>
+            </ul>
+          </section>
+        </div>
+
+        <p class="small">Publikasjoner er registrert under forfatternavnet <strong>A P Pacheco</strong>.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">© <span id="y"></span> André P. Pacheco</footer>
+  </div>
+
+  <script src="site.js"></script>
 </body>
 </html>

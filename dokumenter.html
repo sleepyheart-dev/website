@@ -2,37 +2,65 @@
 <html lang="no">
 <head>
   <meta charset="utf-8">
-  <title>Dokumenter — A P Pacheco</title>
+  <title>CV | A P Pacheco</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kort CV for A P Pacheco.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="dateline"></div>
-  <header>
-    <h1>Dokumenter</h1>
-    <nav>
-      <a href="index-no.html">Hjem</a> ·
-      <a href="om.html">Om meg</a> ·
-      <a href="forskning.html">Forskning</a> ·
-      <a href="videre.html">Videre</a> ·
-      <a href="dokumenter.html">Dokumenter</a> ·
-      <a href="publications-no.html">Publikasjoner</a> ·
-      <a href="kontakt.html">Kontakt</a> ·
-      <a href="index.html">EN</a>
-    </nav>
-  </header>
-  <main>
-    <ul>
-      <li><a href="pdfs/CV_Pacheco_public.pdf" target="_blank">CV (PDF)</a></li>
-      <li><a href="pdfs/Research_Statement.pdf" target="_blank">Forskningsskisse (PDF)</a></li>
-    </ul>
-    <p class="small">Offentlig CV — kontakt meg for full versjon ved behov.</p>
-  </main>
-  <footer>© <span id="y"></span> André P. Pacheco</footer>
-  <script>
-    document.getElementById('dateline').textContent =
-      new Date().toLocaleDateString('no-NO',{year:'numeric',month:'long',day:'numeric'});
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+  <div class="site">
+    <div class="dateline" id="dateline"></div>
+
+    <header class="site-header">
+      <div class="header-top">
+        <a class="nameplate" href="index-no.html">A P Pacheco</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="theme-icon" aria-hidden="true">&#9789;</span>
+          <span class="sr-only">Toggle dark mode</span>
+        </button>
+      </div>
+      <p class="roleline">Medisinsk utdannet · Doktorgradskandidat i søvnmedisin</p>
+      <p class="affiliation">Universitetet i Oslo · Oslo universitetssykehus</p>
+      <nav class="site-nav" aria-label="Hovedmeny">
+        <a href="index-no.html">Hjem</a>
+        <a href="om.html">Om</a>
+        <a href="forskning.html">Forskning</a>
+        <a href="videre.html">Retning</a>
+        <a href="dokumenter.html" aria-current="page">CV</a>
+        <a href="publications-no.html">Publikasjoner</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="docs.html" lang="en" hreflang="en">EN</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel">
+        <p class="eyebrow">Curriculum Vitae</p>
+        <h1>Minimal CV</h1>
+        <ul class="timeline">
+          <li><span class="tl-years">2018-2023</span>Medisinstudiet, Uppsala universitet</li>
+          <li><span class="tl-years">2023-pågående</span>Doktorgradskandidat, Universitetet i Oslo</li>
+          <li><span class="tl-years">2023-pågående</span>Doktorgradsstipendiat, Oslo universitetssykehus</li>
+        </ul>
+        <h2>Utvalgt utdanning</h2>
+        <ul>
+          <li><a href="https://www.gu.se/en/study-gothenburg/clinical-trials-in-medicine-med563" target="_blank" rel="noopener">Clinical Trials in Medicine (MED563)</a>, Göteborgs universitet (vår 2023)</li>
+          <li><a href="https://utbildning.ki.se/student-pa-ki/alla-kurs-och-programwebbar/statistiska-metoder-med-r-75-hp" target="_blank" rel="noopener">Statistical Methods with R (7.5 credits)</a>, Karolinska Institutet (vår 2021)</li>
+        </ul>
+        <h2>Forskeropplæring</h2>
+        <ul>
+          <li>Summer Research School, Sleep Science Lab, Uppsala universitet (2020-2022), PI Christian Benedict</li>
+        </ul>
+        <p class="small">Lengre CV og supplerende dokumentasjon kan deles ved forespørsel.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">© <span id="y"></span> André P. Pacheco</footer>
+  </div>
+
+  <script src="site.js"></script>
 </body>
 </html>
